@@ -4,6 +4,7 @@ import MapGL, { Marker } from 'react-map-gl';
 import MapboxConfig from '../../config/Mapbox';
 
 import UserAddModal from '../../components/UserAddModal/index';
+import UserList from '../../components/UserList/index';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -65,6 +66,7 @@ export default class Map extends Component {
           latitude={this.state.latitude}
           longitude={this.state.longitude}
         />
+        <UserList />
         <MapGL
           {...this.state.viewport}
           onClick={this.handleMapClick}
