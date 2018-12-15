@@ -5,7 +5,7 @@ export const Container = styled.div`
   position: absolute;
   z-index: 1;
   width: calc(0.33 * 100vw);
-  min-width: 170px;
+  min-width: 200px;
   max-width: 300px;
   height: calc(100vh - 60px);
   background-color: #fff;
