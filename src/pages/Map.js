@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import MapGL, { Marker } from "react-map-gl";
+import React, { Component } from 'react';
+import MapGL, { Marker } from 'react-map-gl';
 
-import "mapbox-gl/dist/mapbox-gl.css";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default class Map extends Component {
   state = {
@@ -10,34 +10,34 @@ export default class Map extends Component {
       height: window.innerHeight,
       latitude: -23.5439948,
       longitude: -46.6065452,
-      zoom: 14
-    }
+      zoom: 14,
+    },
   };
 
   componentDidMount() {
-    window.addEventListener("resize", this._resize);
+    window.addEventListener('resize', this._resize);
     this._resize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this._resize);
+    window.removeEventListener('resize', this._resize);
   }
 
   _resize = () => {
-    this.setState({
+    this.setState(prevState => ({
       viewport: {
-        ...this.state.viewport,
+        ...prevState.viewport,
         width: window.innerWidth,
-        height: window.innerHeight
-      }
-    });
+        height: window.innerHeight,
+      },
+    }));
   };
 
-  handleMapClick(e) {
+  handleMapClick = (e) => {
     const [latitude, longitude] = e.lngLat;
 
     alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
-  }
+  };
 
   render() {
     return (
@@ -45,9 +45,7 @@ export default class Map extends Component {
         {...this.state.viewport}
         onClick={this.handleMapClick}
         mapStyle="mapbox://styles/mapbox/basic-v9"
-        mapboxApiAccessToken={
-          "pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
-        }
+        mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
         onViewportChange={viewport => this.setState({ viewport })}
       >
         <Marker
@@ -60,8 +58,9 @@ export default class Map extends Component {
             style={{
               borderRadius: 100,
               width: 48,
-              height: 48
+              height: 48,
             }}
+            alt="Avatar"
             src="https://avatars2.githubusercontent.com/u/2254731?v=4"
           />
         </Marker>
