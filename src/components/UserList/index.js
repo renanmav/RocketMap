@@ -19,6 +19,7 @@ class UserList extends Component {
         avatar_url: PropTypes.url,
       }),
     ).isRequired,
+    removeUser: PropTypes.func.isRequired,
   };
 
   render() {
@@ -33,7 +34,14 @@ class UserList extends Component {
                 <p>{user.login}</p>
               </div>
               <section className="remove">
-                <button type="button">x</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.props.removeUser(user.id);
+                  }}
+                >
+                  x
+                </button>
               </section>
             </li>
           ))}
