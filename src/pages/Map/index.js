@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
+
+import MapboxConfig from '../../config/Mapbox';
+
+import UserAddModal from '../../components/UserAddModal/index';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -12,6 +16,9 @@ export default class Map extends Component {
       longitude: -46.6065452,
       zoom: 14,
     },
+    showUserAddModal: false,
+    latitude: 0,
+    longitude: 0,
   };
 
   componentDidMount() {
@@ -33,38 +40,56 @@ export default class Map extends Component {
     }));
   };
 
+  showModal = () => {
+    this.setState({ showUserAddModal: true });
+  };
+
+  hideModal = () => {
+    this.setState({ showUserAddModal: false });
+  };
+
   handleMapClick = (e) => {
     const [latitude, longitude] = e.lngLat;
 
-    alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
+    this.setState({ latitude, longitude });
+
+    this.showModal();
   };
 
   render() {
     return (
-      <MapGL
-        {...this.state.viewport}
-        onClick={this.handleMapClick}
-        mapStyle="mapbox://styles/mapbox/basic-v9"
-        mapboxApiAccessToken="pk.eyJ1IjoiZGllZ28zZyIsImEiOiJjamh0aHc4em0wZHdvM2tyc3hqbzNvanhrIn0.3HWnXHy_RCi35opzKo8sHQ"
-        onViewportChange={viewport => this.setState({ viewport })}
-      >
-        <Marker
-          latitude={-23.5439948}
-          longitude={-46.6065452}
+      <Fragment>
+        <UserAddModal
+          show={this.state.showUserAddModal}
+          handleClose={this.hideModal}
+          latitude={this.state.latitude}
+          longitude={this.state.longitude}
+        />
+        <MapGL
+          {...this.state.viewport}
           onClick={this.handleMapClick}
-          captureClick={true}
+          mapStyle="mapbox://styles/mapbox/basic-v9"
+          mapboxApiAccessToken={MapboxConfig.AccessToken}
+          onViewportChange={viewport => this.setState({ viewport })}
         >
-          <img
-            style={{
-              borderRadius: 100,
-              width: 48,
-              height: 48,
-            }}
-            alt="Avatar"
-            src="https://avatars2.githubusercontent.com/u/2254731?v=4"
-          />
-        </Marker>
-      </MapGL>
+          <Marker
+            latitude={-23.5439948}
+            longitude={-46.6065452}
+            onClick={this.handleMapClick}
+            captureClick={true}
+          >
+            <img
+              style={{
+                borderRadius: 100,
+                width: 48,
+                height: 48,
+              }}
+              alt="Avatar"
+              src="https://avatars2.githubusercontent.com/u/2254731?v=4"
+            />
+          </Marker>
+        </MapGL>
+      </Fragment>
     );
   }
 }
