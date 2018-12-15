@@ -30,7 +30,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 15px 20px;
 
   h2 {
     font-size: 18px;

@@ -32,6 +32,9 @@ class UserList extends Component {
                 <strong>{user.name}</strong>
                 <p>{user.login}</p>
               </div>
+              <section className="remove">
+                <button type="button">x</button>
+              </section>
             </li>
           ))}
         </ul>

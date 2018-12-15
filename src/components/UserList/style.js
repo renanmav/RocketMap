@@ -42,6 +42,40 @@ export const Container = styled.div`
         margin-right: 10px;
       }
 
+      div {
+        flex: 1;
+
+        font-size: 0.95rem;
+
+        p {
+          font-size: 0.8rem;
+          margin-top: 0.2rem;
+        }
+      }
+
+      .remove {
+        background-color: #d55454;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 50%;
+
+        button {
+          background: none;
+          border: 0;
+          color: #fff;
+          font-weight: bold;
+          padding-bottom: 2px;
+        }
+
+        &:hover {
+          background-color: #c24e4e;
+        }
+      }
+
       &:first-child {
         padding-top: 0px;
         border-top: 0px;
