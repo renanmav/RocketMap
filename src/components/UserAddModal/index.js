@@ -20,9 +20,14 @@ class UserAddModal extends Component {
     longitude: PropTypes.number.isRequired,
   };
 
+  componentDidUpdate() {
+    this.loginInput.focus();
+  }
+
   handleAddUser = (e) => {
     e.preventDefault();
-    this.props.addUserRequest(this.props.latitude, this.props.longitude);
+    this.props.addUserRequest(this.props.latitude, this.props.longitude, this.state.userInput);
+    this.setState({ userInput: '' });
     this.props.handleClose();
   };
 
@@ -39,6 +44,9 @@ class UserAddModal extends Component {
                 placeholder="Usuário no Github"
                 value={this.state.userInput}
                 onChange={e => this.setState({ userInput: e.target.value })}
+                ref={(input) => {
+                  this.loginInput = input;
+                }}
               />
               <div>
                 <button type="button" onClick={handleClose}>
